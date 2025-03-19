@@ -6,8 +6,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "ymqpkygmownybanldbpq.supabase.co",
+        protocol: 'https',
+        hostname: 'wpdoqvepofjfvcndaxlu.supabase.co',
       },
     ],
   },
@@ -15,10 +15,10 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/embed",
+        source: '/embed',
         headers: [
           {
-            key: "Content-Security-Policy",
+            key: 'Content-Security-Policy',
             value: "frame-src 'self' https://roadsidecoder.created.app;",
           },
         ],
