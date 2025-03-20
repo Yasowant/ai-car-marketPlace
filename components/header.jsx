@@ -4,7 +4,6 @@ import { Heart, CarFront, Layout, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import { checkUser } from '@/lib/checkUser';
-import Image from 'next/image';
 
 const Header = async ({ isAdminPage = false }) => {
   const user = await checkUser();
@@ -13,16 +12,15 @@ const Header = async ({ isAdminPage = false }) => {
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
       <nav className="mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href={isAdminPage ? '/admin' : '/'} className="flex">
-          <Image
-            src={'/logo.png'}
-            alt="RideSphere Logo"
-            width={200}
-            height={60}
-            className="h-12 w-auto object-contain"
-          />
+        <Link
+          href={isAdminPage ? '/admin' : '/'}
+          className="flex items-center gap-2"
+        >
+          <span className="text-2xl font-semibold text-blue-600">
+            🌐 Ride<span className="text-purple-500">Sphere</span>
+          </span>
           {isAdminPage && (
-            <span className="text-xs font-extralight">admin</span>
+            <span className="text-xs font-light text-gray-500 ml-2">Admin</span>
           )}
         </Link>
 
