@@ -1,18 +1,18 @@
-import { ChevronRight, Car, Calendar, Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ChevronRight, Car, Calendar, Shield } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { SignedOut } from "@clerk/nextjs";
-import { getFeaturedCars } from "@/actions/home";
-import { CarCard } from "@/components/car-card";
-import { HomeSearch } from "@/components/home-search";
-import Link from "next/link";
-import Image from "next/image";
-import { bodyTypes, carMakes, faqItems } from "@/lib/data";
+} from '@/components/ui/accordion';
+import { SignedOut } from '@clerk/nextjs';
+import { getFeaturedCars } from '@/actions/home';
+import { CarCard } from '@/components/car-card';
+import { HomeSearch } from '@/components/home-search';
+import Link from 'next/link';
+import Image from 'next/image';
+import { bodyTypes, carMakes, faqItems } from '@/lib/data';
 
 export default async function Home() {
   const featuredCars = await getFeaturedCars();
@@ -24,10 +24,11 @@ export default async function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
             <h1 className="text-5xl md:text-8xl mb-4 gradient-title">
-              Find your Dream Car with Vehiql AI
+              Discover Your Perfect Ride with Vehiql AI
             </h1>
             <p className="text-xl text-gray-500 mb-8 max-w-2xl mx-auto">
-              Advanced AI Car Search and test drive from thousands of vehicles.
+              Explore and test drive from a wide range of vehicles with powerful
+              AI search.
             </p>
           </div>
 
@@ -80,7 +81,7 @@ export default async function Home() {
                     }
                     alt={make.name}
                     fill
-                    style={{ objectFit: "contain" }}
+                    style={{ objectFit: 'contain' }}
                   />
                 </div>
                 <h3 className="font-medium">{make.name}</h3>
@@ -103,7 +104,7 @@ export default async function Home() {
               </div>
               <h3 className="text-xl font-bold mb-2">Wide Selection</h3>
               <p className="text-gray-600">
-                Thousands of verified vehicles from trusted dealerships and
+                Browse thousands of verified cars from reliable dealerships and
                 private sellers.
               </p>
             </div>
@@ -113,7 +114,7 @@ export default async function Home() {
               </div>
               <h3 className="text-xl font-bold mb-2">Easy Test Drive</h3>
               <p className="text-gray-600">
-                Book a test drive online in minutes, with flexible scheduling
+                Schedule a test drive online in just minutes with flexible
                 options.
               </p>
             </div>
@@ -193,9 +194,10 @@ export default async function Home() {
             Ready to Find Your Dream Car?
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who found their perfect
-            vehicle through our platform.
+            Join thousands of happy customers who discovered their ideal car
+            with us.
           </p>
+
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button size="lg" variant="secondary" asChild>
               <Link href="/cars">View All Cars</Link>
