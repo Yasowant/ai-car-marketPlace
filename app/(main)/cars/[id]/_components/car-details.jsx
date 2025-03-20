@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { useAuth } from "@clerk/nextjs";
-import { AlertCircle, Calendar } from "lucide-react";
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { useAuth } from '@clerk/nextjs';
+import { AlertCircle, Calendar } from 'lucide-react';
 import {
   Car,
   Fuel,
@@ -15,23 +15,23 @@ import {
   Heart,
   MessageSquare,
   Currency,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { toggleSavedCar } from "@/actions/car-listing";
-import useFetch from "@/hooks/use-fetch";
-import { formatCurrency } from "@/lib/helpers";
-import { format } from "date-fns";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { toggleSavedCar } from '@/actions/car-listing';
+import useFetch from '@/hooks/use-fetch';
+import { formatCurrency } from '@/lib/helpers';
+import { format } from 'date-fns';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import EmiCalculator from "./emi-calculator";
+} from '@/components/ui/dialog';
+import EmiCalculator from './emi-calculator';
 
 export function CarDetails({ car, testDriveInfo }) {
   const router = useRouter();
@@ -57,15 +57,15 @@ export function CarDetails({ car, testDriveInfo }) {
   // Handle errors with useEffect
   useEffect(() => {
     if (toggleError) {
-      toast.error("Failed to update favorites");
+      toast.error('Failed to update favorites');
     }
   }, [toggleError]);
 
   // Handle save car
   const handleSaveCar = async () => {
     if (!isSignedIn) {
-      toast.error("Please sign in to save cars");
-      router.push("/sign-in");
+      toast.error('Please sign in to save cars');
+      router.push('/sign-in');
       return;
     }
 
@@ -81,11 +81,11 @@ export function CarDetails({ car, testDriveInfo }) {
       navigator
         .share({
           title: `${car.year} ${car.make} ${car.model}`,
-          text: `Check out this ${car.year} ${car.make} ${car.model} on Vehiql!`,
+          text: `Check out this ${car.year} ${car.make} ${car.model} on RideSphere!`,
           url: window.location.href,
         })
         .catch((error) => {
-          console.log("Error sharing", error);
+          console.log('Error sharing', error);
           copyToClipboard();
         });
     } else {
@@ -95,14 +95,14 @@ export function CarDetails({ car, testDriveInfo }) {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
-    toast.success("Link copied to clipboard");
+    toast.success('Link copied to clipboard');
   };
 
   // Handle book test drive
   const handleBookTestDrive = () => {
     if (!isSignedIn) {
-      toast.error("Please sign in to book a test drive");
-      router.push("/sign-in");
+      toast.error('Please sign in to book a test drive');
+      router.push('/sign-in');
       return;
     }
     router.push(`/test-drive/${car.id}`);
@@ -137,8 +137,8 @@ export function CarDetails({ car, testDriveInfo }) {
                   key={index}
                   className={`relative cursor-pointer rounded-md h-20 w-24 flex-shrink-0 transition ${
                     index === currentImageIndex
-                      ? "border-2 border-blue-600"
-                      : "opacity-70 hover:opacity-100"
+                      ? 'border-2 border-blue-600'
+                      : 'opacity-70 hover:opacity-100'
                   }`}
                   onClick={() => setCurrentImageIndex(index)}
                 >
@@ -160,15 +160,15 @@ export function CarDetails({ car, testDriveInfo }) {
             <Button
               variant="outline"
               className={`flex items-center gap-2 flex-1 ${
-                isWishlisted ? "text-red-500" : ""
+                isWishlisted ? 'text-red-500' : ''
               }`}
               onClick={handleSaveCar}
               disabled={savingCar}
             >
               <Heart
-                className={`h-5 w-5 ${isWishlisted ? "fill-red-500" : ""}`}
+                className={`h-5 w-5 ${isWishlisted ? 'fill-red-500' : ''}`}
               />
-              {isWishlisted ? "Saved" : "Save"}
+              {isWishlisted ? 'Saved' : 'Save'}
             </Button>
             <Button
               variant="outline"
@@ -220,10 +220,10 @@ export function CarDetails({ car, testDriveInfo }) {
                     <h3>EMI Calculator</h3>
                   </div>
                   <div className="text-sm text-gray-600">
-                    Estimated Monthly Payment:{" "}
+                    Estimated Monthly Payment:{' '}
                     <span className="font-bold text-gray-900">
                       {formatCurrency(car.price / 60)}
-                    </span>{" "}
+                    </span>{' '}
                     for 60 months
                   </div>
                   <div className="text-xs text-gray-500 mt-1">
@@ -234,7 +234,7 @@ export function CarDetails({ car, testDriveInfo }) {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Vehiql Car Loan Calculator</DialogTitle>
+                <DialogTitle>RideSphere Car Loan Calculator</DialogTitle>
                 <EmiCalculator price={car.price} />
               </DialogHeader>
             </DialogContent>
@@ -251,7 +251,7 @@ export function CarDetails({ car, testDriveInfo }) {
                 Our representatives are available to answer all your queries
                 about this vehicle.
               </p>
-              <a href="mailto:help@vehiql.in">
+              <a href="mailto:help@RideSphere.in">
                 <Button variant="outline" className="w-full">
                   Request Info
                 </Button>
@@ -259,7 +259,7 @@ export function CarDetails({ car, testDriveInfo }) {
             </CardContent>
           </Card>
 
-          {(car.status === "SOLD" || car.status === "UNAVAILABLE") && (
+          {(car.status === 'SOLD' || car.status === 'UNAVAILABLE') && (
             <Alert variant="destructive">
               <AlertTitle className="capitalize">
                 This car is {car.status.toLowerCase()}
@@ -269,7 +269,7 @@ export function CarDetails({ car, testDriveInfo }) {
           )}
 
           {/* Book Test Drive Button */}
-          {car.status !== "SOLD" && car.status !== "UNAVAILABLE" && (
+          {car.status !== 'SOLD' && car.status !== 'UNAVAILABLE' && (
             <Button
               className="w-full py-6 text-lg"
               onClick={handleBookTestDrive}
@@ -279,9 +279,9 @@ export function CarDetails({ car, testDriveInfo }) {
               {testDriveInfo.userTestDrive
                 ? `Booked for ${format(
                     new Date(testDriveInfo.userTestDrive.bookingDate),
-                    "EEEE, MMMM d, yyyy"
+                    'EEEE, MMMM d, yyyy'
                   )}`
-                : "Book Test Drive"}
+                : 'Book Test Drive'}
             </Button>
           )}
         </div>
@@ -384,15 +384,15 @@ export function CarDetails({ car, testDriveInfo }) {
             <div className="flex items-start gap-3">
               <LocateFixed className="h-5 w-5 text-blue-600 mt-1 flex-shrink-0" />
               <div>
-                <h4 className="font-medium">Vehiql Motors</h4>
+                <h4 className="font-medium">RideSphere Motors</h4>
                 <p className="text-gray-600">
-                  {testDriveInfo.dealership?.address || "Not Available"}
+                  {testDriveInfo.dealership?.address || 'Not Available'}
                 </p>
                 <p className="text-gray-600 mt-1">
-                  Phone: {testDriveInfo.dealership?.phone || "Not Available"}
+                  Phone: {testDriveInfo.dealership?.phone || 'Not Available'}
                 </p>
                 <p className="text-gray-600">
-                  Email: {testDriveInfo.dealership?.email || "Not Available"}
+                  Email: {testDriveInfo.dealership?.email || 'Not Available'}
                 </p>
               </div>
             </div>
@@ -405,13 +405,13 @@ export function CarDetails({ car, testDriveInfo }) {
                   ? testDriveInfo.dealership.workingHours
                       .sort((a, b) => {
                         const days = [
-                          "MONDAY",
-                          "TUESDAY",
-                          "WEDNESDAY",
-                          "THURSDAY",
-                          "FRIDAY",
-                          "SATURDAY",
-                          "SUNDAY",
+                          'MONDAY',
+                          'TUESDAY',
+                          'WEDNESDAY',
+                          'THURSDAY',
+                          'FRIDAY',
+                          'SATURDAY',
+                          'SUNDAY',
                         ];
                         return (
                           days.indexOf(a.dayOfWeek) - days.indexOf(b.dayOfWeek)
@@ -429,28 +429,28 @@ export function CarDetails({ car, testDriveInfo }) {
                           <span>
                             {day.isOpen
                               ? `${day.openTime} - ${day.closeTime}`
-                              : "Closed"}
+                              : 'Closed'}
                           </span>
                         </div>
                       ))
                   : // Default hours if none provided
                     [
-                      "Monday",
-                      "Tuesday",
-                      "Wednesday",
-                      "Thursday",
-                      "Friday",
-                      "Saturday",
-                      "Sunday",
+                      'Monday',
+                      'Tuesday',
+                      'Wednesday',
+                      'Thursday',
+                      'Friday',
+                      'Saturday',
+                      'Sunday',
                     ].map((day, index) => (
                       <div key={day} className="flex justify-between text-sm">
                         <span className="text-gray-600">{day}</span>
                         <span>
                           {index < 5
-                            ? "9:00 - 18:00"
+                            ? '9:00 - 18:00'
                             : index === 5
-                            ? "10:00 - 16:00"
-                            : "Closed"}
+                            ? '10:00 - 16:00'
+                            : 'Closed'}
                         </span>
                       </div>
                     ))}

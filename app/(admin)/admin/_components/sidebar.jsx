@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { LayoutDashboard, Car, Calendar, Cog, LogOut } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { SignOutButton } from "@clerk/nextjs";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { LayoutDashboard, Car, Calendar, Cog, LogOut } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { SignOutButton } from '@clerk/nextjs';
 
 // Navigation items
 const routes = [
   {
-    label: "Dashboard",
+    label: 'Dashboard',
     icon: LayoutDashboard,
-    href: "/admin",
+    href: '/admin',
   },
   {
-    label: "Cars",
+    label: 'Cars',
     icon: Car,
-    href: "/admin/cars",
+    href: '/admin/cars',
   },
   {
-    label: "Test Drives",
+    label: 'Test Drives',
     icon: Calendar,
-    href: "/admin/test-drives",
+    href: '/admin/test-drives',
   },
   {
-    label: "Settings",
+    label: 'Settings',
     icon: Cog,
-    href: "/admin/settings",
+    href: '/admin/settings',
   },
 ];
 
@@ -39,7 +39,7 @@ export const Sidebar = () => {
       <div className="hidden md:flex h-full flex-col overflow-y-auto bg-white shadow-sm border-r">
         <div className="p-6">
           <Link href="/admin">
-            <h1 className="text-xl font-bold">Vehiql Admin</h1>
+            <h1 className="text-xl font-bold">RideSphere Admin</h1>
           </Link>
         </div>
         <div className="flex flex-col w-full">
@@ -48,11 +48,11 @@ export const Sidebar = () => {
               key={route.href}
               href={route.href}
               className={cn(
-                "flex items-center gap-x-2 text-slate-500 text-sm font-medium pl-6 transition-all hover:text-slate-600 hover:bg-slate-100/50",
+                'flex items-center gap-x-2 text-slate-500 text-sm font-medium pl-6 transition-all hover:text-slate-600 hover:bg-slate-100/50',
                 pathname === route.href
-                  ? "text-blue-700 bg-blue-100/50 hover:bg-blue-100 hover:text-blue-700"
-                  : "",
-                "h-12"
+                  ? 'text-blue-700 bg-blue-100/50 hover:bg-blue-100 hover:text-blue-700'
+                  : '',
+                'h-12'
               )}
             >
               <route.icon className="h-5 w-5" />
@@ -77,15 +77,15 @@ export const Sidebar = () => {
             key={route.href}
             href={route.href}
             className={cn(
-              "flex flex-col items-center justify-center text-slate-500 text-xs font-medium transition-all",
-              pathname === route.href ? "text-blue-700" : "",
-              "py-1 flex-1"
+              'flex flex-col items-center justify-center text-slate-500 text-xs font-medium transition-all',
+              pathname === route.href ? 'text-blue-700' : '',
+              'py-1 flex-1'
             )}
           >
             <route.icon
               className={cn(
-                "h-6 w-6 mb-1",
-                pathname === route.href ? "text-blue-700" : "text-slate-500"
+                'h-6 w-6 mb-1',
+                pathname === route.href ? 'text-blue-700' : 'text-slate-500'
               )}
             />
             {route.label}

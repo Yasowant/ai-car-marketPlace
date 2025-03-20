@@ -1,8 +1,8 @@
-import { CarsList } from "./_components/car-list";
+import { CarsList } from './_components/car-list';
 
 export const metadata = {
-  title: "Cars | Vehiql Admin",
-  description: "Manage cars in your marketplace",
+  title: 'Cars | RideSphere Admin',
+  description: 'Manage cars in your marketplace',
 };
 
 export default function CarsPage() {

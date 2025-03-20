@@ -1,8 +1,8 @@
-import { SettingsForm } from "./_components/settings-form";
+import { SettingsForm } from './_components/settings-form';
 
 export const metadata = {
-  title: "Settings | Vehiql Admin",
-  description: "Manage dealership working hours and admin users",
+  title: 'Settings | RideSphere Admin',
+  description: 'Manage dealership working hours and admin users',
 };
 
 export default function SettingsPage() {

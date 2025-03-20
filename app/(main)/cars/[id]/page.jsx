@@ -1,6 +1,6 @@
-import { getCarById } from "@/actions/car-listing";
-import { CarDetails } from "./_components/car-details";
-import { notFound } from "next/navigation";
+import { getCarById } from '@/actions/car-listing';
+import { CarDetails } from './_components/car-details';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -8,15 +8,15 @@ export async function generateMetadata({ params }) {
 
   if (!result.success) {
     return {
-      title: "Car Not Found | Vehiql",
-      description: "The requested car could not be found",
+      title: 'Car Not Found | RideSphere',
+      description: 'The requested car could not be found',
     };
   }
 
   const car = result.data;
 
   return {
-    title: `${car.year} ${car.make} ${car.model} | Vehiql`,
+    title: `${car.year} ${car.make} ${car.model} | RideSphere`,
     description: car.description.substring(0, 160),
     openGraph: {
       images: car.images?.[0] ? [car.images[0]] : [],

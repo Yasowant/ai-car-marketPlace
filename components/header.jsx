@@ -1,22 +1,22 @@
-import React from "react";
-import { Button } from "./ui/button";
-import { Heart, CarFront, Layout, ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { checkUser } from "@/lib/checkUser";
-import Image from "next/image";
+import React from 'react';
+import { Button } from './ui/button';
+import { Heart, CarFront, Layout, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import { checkUser } from '@/lib/checkUser';
+import Image from 'next/image';
 
 const Header = async ({ isAdminPage = false }) => {
   const user = await checkUser();
-  const isAdmin = user?.role === "ADMIN";
+  const isAdmin = user?.role === 'ADMIN';
 
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
       <nav className="mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href={isAdminPage ? "/admin" : "/"} className="flex">
+        <Link href={isAdminPage ? '/admin' : '/'} className="flex">
           <Image
-            src={"/logo.png"}
-            alt="Vehiql Logo"
+            src={'/logo.png'}
+            alt="RideSphere Logo"
             width={200}
             height={60}
             className="h-12 w-auto object-contain"
@@ -79,7 +79,7 @@ const Header = async ({ isAdminPage = false }) => {
             <UserButton
               appearance={{
                 elements: {
-                  avatarBox: "w-10 h-10",
+                  avatarBox: 'w-10 h-10',
                 },
               }}
             />

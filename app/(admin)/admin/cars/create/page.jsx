@@ -1,8 +1,8 @@
-import { AddCarForm } from "./_components/add-car-form";
+import { AddCarForm } from './_components/add-car-form';
 
 export const metadata = {
-  title: "Add New Car | Vehiql Admin",
-  description: "Add a new car to the marketplace",
+  title: 'Add New Car | RideSphere Admin',
+  description: 'Add a new car to the marketplace',
 };
 
 export default function AddCarPage() {

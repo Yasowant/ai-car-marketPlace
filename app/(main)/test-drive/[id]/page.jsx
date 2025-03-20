@@ -1,10 +1,10 @@
-import { getCarById } from "@/actions/car-listing";
-import { notFound } from "next/navigation";
-import { TestDriveForm } from "./_components/test-drive-form";
+import { getCarById } from '@/actions/car-listing';
+import { notFound } from 'next/navigation';
+import { TestDriveForm } from './_components/test-drive-form';
 
 export async function generateMetadata() {
   return {
-    title: `Book Test Drive | Vehiql`,
+    title: `Book Test Drive | RideSphere`,
     description: `Schedule a test drive in few seconds`,
   };
 }

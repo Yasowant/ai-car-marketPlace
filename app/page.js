@@ -20,13 +20,13 @@ export default async function Home() {
   return (
     <div className="flex flex-col pt-20">
       {/* Hero Section with Gradient Title */}
-      <section className="relative py-16 md:py-28 dotted-background">
+      <section className="relative py-16 md:py-28 bg-gradient-to-r from-blue-500 to-blue-700">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
-            <h1 className="text-5xl md:text-8xl mb-4 gradient-title">
-              Discover Your Perfect Ride with Vehiql AI
+            <h1 className="text-5xl md:text-8xl mb-4 text-white">
+              Discover Your Perfect Ride with RideSphere AI
             </h1>
-            <p className="text-xl text-gray-500 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               Explore and test drive from a wide range of vehicles with powerful
               AI search.
             </p>

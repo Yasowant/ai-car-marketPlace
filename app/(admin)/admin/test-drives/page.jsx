@@ -1,8 +1,8 @@
-import { TestDrivesList } from "./_components/test-drive-list";
+import { TestDrivesList } from './_components/test-drive-list';
 
 export const metadata = {
-  title: "Test Drives | Vehiql Admin",
-  description: "Manage test drive bookings",
+  title: 'Test Drives | RideSphere Admin',
+  description: 'Manage test drive bookings',
 };
 
 export default function TestDrivesPage() {

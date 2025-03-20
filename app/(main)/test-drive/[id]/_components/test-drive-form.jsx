@@ -1,52 +1,52 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { format, parseISO } from "date-fns";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { format, parseISO } from 'date-fns';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import {
   Calendar as CalendarIcon,
   Car,
   CheckCircle2,
   Loader2,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Card, CardContent } from "@/components/ui/card";
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/popover';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
-import { bookTestDrive } from "@/actions/test-drive";
-import { toast } from "sonner";
-import useFetch from "@/hooks/use-fetch";
+} from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
+import { bookTestDrive } from '@/actions/test-drive';
+import { toast } from 'sonner';
+import useFetch from '@/hooks/use-fetch';
 
 // Define Zod schema for form validation
 const testDriveSchema = z.object({
   date: z.date({
-    required_error: "Please select a date for your test drive",
+    required_error: 'Please select a date for your test drive',
   }),
   timeSlot: z.string({
-    required_error: "Please select a time slot",
+    required_error: 'Please select a time slot',
   }),
   notes: z.string().optional(),
 });
@@ -70,7 +70,7 @@ export function TestDriveForm({ car, testDriveInfo }) {
     defaultValues: {
       date: undefined,
       timeSlot: undefined,
-      notes: "",
+      notes: '',
     },
   });
 
@@ -79,7 +79,7 @@ export function TestDriveForm({ car, testDriveInfo }) {
   const existingBookings = testDriveInfo?.existingBookings || [];
 
   // Watch date field to update available time slots
-  const selectedDate = watch("date");
+  const selectedDate = watch('date');
 
   // Custom hooks for API calls
   const {
@@ -93,13 +93,13 @@ export function TestDriveForm({ car, testDriveInfo }) {
   useEffect(() => {
     if (bookingResult?.success) {
       setBookingDetails({
-        date: format(bookingResult?.data?.bookingDate, "EEEE, MMMM d, yyyy"),
+        date: format(bookingResult?.data?.bookingDate, 'EEEE, MMMM d, yyyy'),
         timeSlot: `${format(
           parseISO(`2022-01-01T${bookingResult?.data?.startTime}`),
-          "h:mm a"
+          'h:mm a'
         )} - ${format(
           parseISO(`2022-01-01T${bookingResult?.data?.endTime}`),
-          "h:mm a"
+          'h:mm a'
         )}`,
         notes: bookingResult?.data?.notes,
       });
@@ -114,7 +114,7 @@ export function TestDriveForm({ car, testDriveInfo }) {
   useEffect(() => {
     if (bookingError) {
       toast.error(
-        bookingError.message || "Failed to book test drive. Please try again."
+        bookingError.message || 'Failed to book test drive. Please try again.'
       );
     }
   }, [bookingError]);
@@ -123,7 +123,7 @@ export function TestDriveForm({ car, testDriveInfo }) {
   useEffect(() => {
     if (!selectedDate || !dealership?.workingHours) return;
 
-    const selectedDayOfWeek = format(selectedDate, "EEEE").toUpperCase();
+    const selectedDayOfWeek = format(selectedDate, 'EEEE').toUpperCase();
 
     // Find working hours for the selected day
     const daySchedule = dealership.workingHours.find(
@@ -136,20 +136,20 @@ export function TestDriveForm({ car, testDriveInfo }) {
     }
 
     // Parse opening and closing hours
-    const openHour = parseInt(daySchedule.openTime.split(":")[0]);
-    const closeHour = parseInt(daySchedule.closeTime.split(":")[0]);
+    const openHour = parseInt(daySchedule.openTime.split(':')[0]);
+    const closeHour = parseInt(daySchedule.closeTime.split(':')[0]);
 
     // Generate time slots (every hour)
     const slots = [];
     for (let hour = openHour; hour < closeHour; hour++) {
-      const startTime = `${hour.toString().padStart(2, "0")}:00`;
-      const endTime = `${(hour + 1).toString().padStart(2, "0")}:00`;
+      const startTime = `${hour.toString().padStart(2, '0')}:00`;
+      const endTime = `${(hour + 1).toString().padStart(2, '0')}:00`;
 
       // Check if this slot is already booked
       const isBooked = existingBookings.some((booking) => {
         const bookingDate = booking.date;
         return (
-          bookingDate === format(selectedDate, "yyyy-MM-dd") &&
+          bookingDate === format(selectedDate, 'yyyy-MM-dd') &&
           (booking.startTime === startTime || booking.endTime === endTime)
         );
       });
@@ -167,7 +167,7 @@ export function TestDriveForm({ car, testDriveInfo }) {
     setAvailableTimeSlots(slots);
 
     // Clear time slot selection when date changes
-    setValue("timeSlot", "");
+    setValue('timeSlot', '');
   }, [selectedDate]);
 
   // Create a function to determine which days should be disabled
@@ -178,7 +178,7 @@ export function TestDriveForm({ car, testDriveInfo }) {
     }
 
     // Get day of week
-    const dayOfWeek = format(day, "EEEE").toUpperCase();
+    const dayOfWeek = format(day, 'EEEE').toUpperCase();
 
     // Find working hours for the day
     const daySchedule = dealership?.workingHours?.find(
@@ -196,16 +196,16 @@ export function TestDriveForm({ car, testDriveInfo }) {
     );
 
     if (!selectedSlot) {
-      toast.error("Selected time slot is not available");
+      toast.error('Selected time slot is not available');
       return;
     }
 
     await bookTestDriveFn({
       carId: car.id,
-      bookingDate: format(data.date, "yyyy-MM-dd"),
+      bookingDate: format(data.date, 'yyyy-MM-dd'),
       startTime: selectedSlot.startTime,
       endTime: selectedSlot.endTime,
-      notes: data.notes || "",
+      notes: data.notes || '',
     });
   };
 
@@ -278,18 +278,18 @@ export function TestDriveForm({ car, testDriveInfo }) {
             <h2 className="text-xl font-bold mb-4">Dealership Info</h2>
             <div className="text-sm">
               <p className="font-medium">
-                {dealership?.name || "Vehiql Motors"}
+                {dealership?.name || 'RideSphere Motors'}
               </p>
               <p className="text-gray-600 mt-1">
-                {dealership?.address || "Address not available"}
+                {dealership?.address || 'Address not available'}
               </p>
               <p className="text-gray-600 mt-3">
-                <span className="font-medium">Phone:</span>{" "}
-                {dealership?.phone || "Not available"}
+                <span className="font-medium">Phone:</span>{' '}
+                {dealership?.phone || 'Not available'}
               </p>
               <p className="text-gray-600">
-                <span className="font-medium">Email:</span>{" "}
-                {dealership?.email || "Not available"}
+                <span className="font-medium">Email:</span>{' '}
+                {dealership?.email || 'Not available'}
               </p>
             </div>
           </CardContent>
@@ -318,14 +318,14 @@ export function TestDriveForm({ car, testDriveInfo }) {
                           <Button
                             variant="outline"
                             className={cn(
-                              "w-full justify-start text-left font-normal",
-                              !field.value && "text-muted-foreground"
+                              'w-full justify-start text-left font-normal',
+                              !field.value && 'text-muted-foreground'
                             )}
                           >
                             <CalendarIcon className="mr-2 h-4 w-4" />
                             {field.value
-                              ? format(field.value, "PPP")
-                              : "Pick a date"}
+                              ? format(field.value, 'PPP')
+                              : 'Pick a date'}
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0">
@@ -369,10 +369,10 @@ export function TestDriveForm({ car, testDriveInfo }) {
                           <SelectValue
                             placeholder={
                               !selectedDate
-                                ? "Please select a date first"
+                                ? 'Please select a date first'
                                 : availableTimeSlots.length === 0
-                                ? "No available slots on this date"
-                                : "Select a time slot"
+                                ? 'No available slots on this date'
+                                : 'Select a time slot'
                             }
                           />
                         </SelectTrigger>
@@ -424,7 +424,7 @@ export function TestDriveForm({ car, testDriveInfo }) {
                     Booking Your Test Drive...
                   </>
                 ) : (
-                  "Book Test Drive"
+                  'Book Test Drive'
                 )}
               </Button>
             </form>
@@ -483,7 +483,7 @@ export function TestDriveForm({ car, testDriveInfo }) {
                 </div>
                 <div className="flex justify-between">
                   <span className="font-medium">Dealership:</span>
-                  <span>{dealership?.name || "Vehiql Motors"}</span>
+                  <span>{dealership?.name || 'RideSphere Motors'}</span>
                 </div>
               </div>
 

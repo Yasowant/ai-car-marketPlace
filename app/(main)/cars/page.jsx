@@ -1,10 +1,10 @@
-import { CarFilters } from "./_components/car-filters";
-import { getCarFilters } from "@/actions/car-listing";
-import { CarListings } from "./_components/cars-listing";
+import { CarFilters } from './_components/car-filters';
+import { getCarFilters } from '@/actions/car-listing';
+import { CarListings } from './_components/cars-listing';
 
 export const metadata = {
-  title: "Cars | Vehiql",
-  description: "Browse and search for your dream car",
+  title: 'Cars | RideSphere',
+  description: 'Browse and search for your dream car',
 };
 
 export default async function CarsPage() {
